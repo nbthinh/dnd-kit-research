@@ -4,28 +4,32 @@ import { Droppable } from './components/Droppable';
 import { Draggable } from './components/Draggable';
 import React, {useState} from 'react';
 function App() {
-  const [isDropped, setIsDropped] = useState(false);
+  const containers = ['A', 'B', 'C'];
+  const [parent, setParent] = useState(null);
   const draggableMarkup = (
-    <Draggable>Drag me</Draggable>
+    <Draggable id="draggable">Drag me</Draggable>
   );
 
-  // Fire khi thả card
   function handleDragEnd(event) {
-    console.log('Căm thù thằng Nguyễn Thắng 89 = ', event)
-    // Nếu thả phần tử dragable vào vùng over thì sẽ có thông tin của event.over
-    // Không thì event.over == null
-    if (event.over && event.over.id === 'droppable') {
-      setIsDropped(true);
-    }
+    const {over} = event;
+
+    // If the item is dropped over a container, set it as the parent
+    // otherwise reset the parent to `null`
+    setParent(over ? over.id : null);
   }
 
   return (
     <>
       <DndContext onDragEnd={handleDragEnd}>
-        {!isDropped ? draggableMarkup : null}
-        <Droppable>
-          {isDropped ? draggableMarkup : 'Drop here'}
-        </Droppable>
+        {parent === null ? draggableMarkup : null}
+
+        {containers.map((id) => (
+          // We updated the Droppable component so it would accept an `id`
+          // prop and pass it to `useDroppable`
+          <Droppable key={id} id={id}>
+            {parent === id ? draggableMarkup : 'Drop here'}
+          </Droppable>
+        ))}
       </DndContext>
     </>
   )

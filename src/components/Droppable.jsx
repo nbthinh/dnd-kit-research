@@ -7,7 +7,7 @@ export const Droppable = (props) => {
   // isOver = true nếu hover vào vùng không gian drop
   // = false khi rê ngoài vùng không gian drop
   const {isOver, setNodeRef} = useDroppable({
-    id: 'droppable',
+    id: props.id,
   });
   const style = {
     color: isOver ? 'green' : undefined,

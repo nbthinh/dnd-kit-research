@@ -7,8 +7,8 @@ export const Draggable = (props) => {
     id: 'draggable',
   });
   const style = transform ? {
-    
-    transform: CSS.Translate.toString(transform),
+    transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+    // transform: CSS.Translate.toString(transform),
     // transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`
   } : undefined;
 
