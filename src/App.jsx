@@ -19,6 +19,27 @@ import { Droppable } from './components/Droppable';
 import { Draggable } from './components/Draggable';
 import React, {useState} from 'react';
 import { SortableItem } from './components/SortableItem';
+import { Box, ThemeProvider, createTheme } from '@mui/system';
+
+// eslint-disable-next-line no-unused-vars
+const theme = createTheme({
+  palette: {
+    background: {
+      paper: '#fff',
+    },
+    text: {
+      primary: '#173A5E',
+      secondary: '#46505A',
+    },
+    action: {
+      active: '#001E3C',
+    },
+    success: {
+      dark: '#009688',
+    },
+  },
+});
+
 function App() {
   const [items, setItems] = useState([1, 2, 3]);
   const sensors = useSensors(
@@ -54,9 +75,9 @@ function App() {
           items={items}
           strategy={verticalListSortingStrategy}
         >
-          <div sx={{display: 'flex'}}>
+          <Box sx={{display: 'flex', gap: 1}}>
             {items.map(id => <SortableItem key={id} id={id} />)}
-          </div>
+          </Box>
         </SortableContext>
       </DndContext>
     </>
