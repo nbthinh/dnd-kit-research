@@ -50,3 +50,60 @@ function App() {
 
 - Component `SortableContext` cũng chấp nhận props id 1 cách tuỳ ý. Nếu 1 id không được cung cấp, nó sẽ tự động sinh ra cho bạn. Prop id cho các trường hợp nâng cao. Nếu bạn đang xây dựng các cảm biến tuỳ chỉnh (sensors), bạn sẽ có truy cập tới mỗi dữ liệu prop của phần tử có thể sắp xếp, nó sẽ chưa containerId liên kết tới các ngữ cảnh của sortable context.
 
+### Cách sử dụng 
+
+- Bạn có thể lồng nhiều providers `SortableContext` bên trong cùng 1 provider `DndContext`
+- Bạn cũng có thể lồng nhiều providers `SortableContext` bên trong nhiều providers `SortableContext` khác, hoặc tất cả dưới cùng 1 provider `DndContext` hoặc mỗi cái với các providers riêng biệt của chính nó nếu bạn muốn cấu hình chúng với các tuỳ chọn khác nhau:
+
+```
+// Bad, missing parent <DndContext>
+<SortableContext>
+  {/* ... */}
+</SortableContext>
+
+// Good, basic setup
+<DndContext>
+  <SortableContext>
+    {/* ... */}
+  </SortableContext>
+</DndContext>
+
+// Good, multiple sibling Sortable contexts
+<DndContext>
+  <SortableContext>
+    {/* ... */}
+  </SortableContext>
+  <SortableContext>
+    {/* ... */}
+  </SortableContext>
+</DndContext>
+
+// Good, nested DndContexts
+<DndContext>
+  <SortableContext items={["A, "B", "C"]}>
+    <DndContext>
+      <SortableContext items={["A, "B", "C"]}>
+        {/* ... */}
+      </SortableContext>
+    </DndContext>
+  </SortableContext>
+</DndContext>
+
+// Bad, nested Sortable contexts with `id` collisions
+<DndContext>
+  <SortableContext items={["A, "B", "C"]}>
+    <SortableContext items={["A, "B", "C"]}>
+      {/* ... */}
+    </SortableContext>
+  </SortableContext>
+</DndContext>
+
+// Good, nested Sortable contexts with unique `id`s
+<DndContext>
+  <SortableContext items={["A, "B", "C"]}>
+    <SortableContext items={[1, 2, 3]}>
+      {/* ... */}
+    </SortableContext>
+  </SortableContext>
+</DndContext>
+```
