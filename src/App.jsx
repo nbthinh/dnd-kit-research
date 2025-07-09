@@ -41,6 +41,8 @@ function App() {
     }
   }
 
+  
+
   return (
     <>
       <DndContext 
@@ -52,7 +54,9 @@ function App() {
           items={items}
           strategy={verticalListSortingStrategy}
         >
-          {items.map(id => <SortableItem key={id} id={id} />)}
+          <div sx={{display: 'flex'}}>
+            {items.map(id => <SortableItem key={id} id={id} />)}
+          </div>
         </SortableContext>
       </DndContext>
     </>
