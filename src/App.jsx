@@ -7,7 +7,7 @@ function App() {
   const containers = ['A', 'B', 'C'];
   const [parent, setParent] = useState(null);
   const draggableMarkup = (
-    <Draggable id="draggable">Drag me</Draggable>
+    <Draggable id="draggable">Mặc cái quần</Draggable>
   );
 
   function handleDragEnd(event) {
@@ -20,7 +20,9 @@ function App() {
 
   return (
     <>
-      <DndContext onDragEnd={handleDragEnd}>
+      <DndContext
+        onDragEnd={handleDragEnd}
+      >
         {parent === null ? draggableMarkup : null}
 
         {containers.map((id) => (
