@@ -113,3 +113,12 @@ function App() {
 
 
 <!-- eager: háo hức -->
+
+- Cái sortable thiết lập sẵn được hỗ trợ bởi `@dnd-kit/core` giúp chúng ta xây dựng các giao diện sortable.
+- Sortable thiết lập sẵn này cho ta 2 khái niệm: `SortableContext` và `useSortable` hook:
+  - `SortableContext` cung cấp thông tin thông qua ngữ cảnh được giả định bởi useSortable hook.
+  - `useSortable` hook là một kiểu trừu tượng tạo ra ra `useDroppable` và `useDraggable`
+
+
+- Nói chung là SortableContext để tạo ra 1 vùng cho chúng ta có thể kéo thả, sắp xếp lại các phần tử trong nó. Mỗi phần tử kéo thả sẽ định nghĩa 1 useSortable riêng.
+- Ta có thể thấy, ta lập qua từng items, với mỗi items ta render 1 SortableItem, bên trong mỗi SortableItem, ta định nghĩa một useSortable riêng để biến nó thành những phần tử kéo thả.
