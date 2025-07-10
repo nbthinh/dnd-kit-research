@@ -14,11 +14,15 @@ export function SortableItem(props) {
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
+    border: `1px solid green`,
+    padding: '5px 15px',
+    borderRadius: '25px',
+    cursor: 'pointer'
   };
   
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      Hello world
+      Hello world {props.id}
     </div>
   );
 }

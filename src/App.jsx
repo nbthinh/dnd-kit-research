@@ -49,9 +49,22 @@ function App() {
     })
   );
 
+  // Được gọi khi thả phần tử xuống
   function handleDragEnd(event) {
     const {active, over} = event;
-    
+    console.log('handleDragEnd = ', event)
+    if (active.id !== over.id) {
+      setItems((items) => {
+        const oldIndex = items.indexOf(active.id);
+        const newIndex = items.indexOf(over.id);
+        
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+  }
+  function handleDragOver(event) {
+    const {active, over} = event;
+    console.log('handleDragEnd = ', event)
     if (active.id !== over.id) {
       setItems((items) => {
         const oldIndex = items.indexOf(active.id);
@@ -70,6 +83,7 @@ function App() {
         sensors={sensors}
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
+        onDragOver={handleDragOver}
       >
         <SortableContext 
           items={items}
